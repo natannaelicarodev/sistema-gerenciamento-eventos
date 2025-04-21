@@ -56,8 +56,8 @@ npm install -g prisma typescript ts-node
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/eventos-app.git
-cd eventos-app
+git clone https://github.com/natannaelicarodev/sistema-gerenciamento-eventos.git
+cd sistema-gerenciamento-eventos
 ```
 
 2. Instale as dependências:
