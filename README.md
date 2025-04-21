@@ -1,4 +1,4 @@
-# Eventos App - Sistema de Gerenciamento de Eventos
+# Sistema de Gerenciamento de Eventos
 
 Este é um sistema de gerenciamento de eventos com funcionalidades de check-in/check-out de participantes, desenvolvido com foco em dispositivos móveis.
 
