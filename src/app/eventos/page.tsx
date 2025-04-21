@@ -25,8 +25,6 @@ export default function EventosPage() {
           throw new Error('Falha ao carregar eventos');
         }
         const data = await response.json();
-        
-        console.log("data", data)
         setEventos(data);
       } catch (err) {
         setError('Erro ao carregar eventos. Tente novamente mais tarde.');
@@ -39,7 +37,6 @@ export default function EventosPage() {
     fetchEventos();
   }, []);
 
-  // Função para formatar a data
   const formatarData = (dataString: string) => {
     const data = new Date(dataString);
     return data.toLocaleDateString('pt-BR');
@@ -47,13 +44,12 @@ export default function EventosPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header com gradiente inspirado na logo */}
       <header className="navbar bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 shadow-lg">
         <Link href="/" className="text-white hover:text-gray-200">
           ← Voltar
         </Link>
         <h1 className="navbar-title text-white font-bold">Eventos</h1>
-        <div className="w-6"></div> {/* Espaçador para centralizar o título */}
+        <div className="w-6"></div>
       </header>
 
       {/* Main Content */}
@@ -70,8 +66,8 @@ export default function EventosPage() {
           <div className="card bg-red-50 border border-red-200 mb-4">
             <div className="card-body text-red-700">
               <p>{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="btn btn-outline text-red-600 border-red-300 mt-2"
               >
                 Tentar novamente
@@ -119,7 +115,6 @@ export default function EventosPage() {
         )}
       </main>
 
-      {/* Bottom Navigation */}
       <nav className="bottom-nav">
         <Link href="/" className="bottom-nav-item">
           <span className="bottom-nav-icon">🏠</span>

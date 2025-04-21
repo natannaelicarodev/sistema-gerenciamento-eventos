@@ -90,7 +90,6 @@ export class CheckinsService {
 
   async realizarCheckin(participanteId: number, eventoId: number) {
     try {
-      // Verificar se o participante existe e pertence ao evento
       const participante = await prisma.participante.findFirst({
         where: {
           id: participanteId,
@@ -102,7 +101,6 @@ export class CheckinsService {
         throw new Error('Participante não encontrado ou não pertence a este evento');
       }
 
-      // Verificar se já existe um checkin ativo
       const checkinExistente = await prisma.checkin.findFirst({
         where: {
           participante_id: participanteId,
@@ -117,8 +115,7 @@ export class CheckinsService {
         if (checkinExistente.status === 'presente') {
           throw new Error('Participante já realizou check-in neste evento');
         }
-        
-        // Atualizar checkin pendente
+
         return await prisma.checkin.update({
           where: { id: checkinExistente.id },
           data: {
@@ -132,7 +129,6 @@ export class CheckinsService {
         });
       }
 
-      // Criar novo checkin
       return await prisma.checkin.create({
         data: {
           participante_id: participanteId,
@@ -153,7 +149,6 @@ export class CheckinsService {
 
   async realizarCheckout(participanteId: number, eventoId: number) {
     try {
-      // Buscar checkin ativo
       const checkinAtivo = await prisma.checkin.findFirst({
         where: {
           participante_id: participanteId,
@@ -166,7 +161,6 @@ export class CheckinsService {
         throw new Error('Não há check-in ativo para este participante neste evento');
       }
 
-      // Atualizar para checkout
       return await prisma.checkin.update({
         where: { id: checkinAtivo.id },
         data: {

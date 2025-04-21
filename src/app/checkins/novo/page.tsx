@@ -86,7 +86,6 @@ export default function NovoCheckin({ params }: NovoCheckinProps) {
         throw new Error(errorData.error || 'Falha ao registrar check-in');
       }
 
-      // Redirecionar para a página de check-ins após o sucesso
       router.push('/checkins');
     } catch (err: any) {
       console.error('Erro ao registrar check-in:', err);
@@ -104,7 +103,7 @@ export default function NovoCheckin({ params }: NovoCheckinProps) {
           ← Voltar
         </Link>
         <h1 className="navbar-title">Novo Check-in</h1>
-        <div className="w-6"></div> {/* Espaçador para centralizar o título */}
+        <div className="w-6"></div> 
       </header>
 
       {/* Main Content */}
@@ -179,7 +178,6 @@ export default function NovoCheckin({ params }: NovoCheckinProps) {
         </div>
       </main>
 
-      {/* Estilo global para garantir que as opções dos seletores sejam visíveis */}
       <style jsx global>{`
         select option {
           color: #1f2937 !important;
@@ -196,7 +194,6 @@ export default function NovoCheckin({ params }: NovoCheckinProps) {
         }
       `}</style>
 
-      {/* Bottom Navigation */}
       <nav className="bottom-nav">
         <Link href="/" className="bottom-nav-item">
           <span className="bottom-nav-icon">🏠</span>

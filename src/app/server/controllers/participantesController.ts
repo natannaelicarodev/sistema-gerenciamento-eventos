@@ -63,7 +63,6 @@ export class ParticipantesController {
 
   async create(data: ParticipanteData) {
     try {
-      // Verificar se o evento existe
       const evento = await prisma.evento.findUnique({
         where: { id: data.evento_id },
       });
@@ -72,7 +71,6 @@ export class ParticipantesController {
         throw new Error('Evento não encontrado');
       }
 
-      // Verificar se há vagas disponíveis
       const participantesCount = await prisma.participante.count({
         where: { evento_id: data.evento_id },
       });

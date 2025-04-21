@@ -40,8 +40,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'detalhes' | 'participantes' | 'checkins'>('detalhes');
-
-  // Paginação para participantes
   const [currentPageParticipantes, setCurrentPageParticipantes] = useState(1);
   const cardsPerPage = 4;
 
@@ -56,14 +54,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
         const data = await response.json();
         setEvento(data);
 
-        return console.log(params.id)
-        // Buscar estatísticas
-        // const statsResponse = await fetch(`/api/estatisticas/${params.id}`);
-        // if (!statsResponse.ok) {
-        //   throw new Error('Falha ao carregar estatísticas');
-        // }
-        // const statsData = await statsResponse.json();
-        // setStats(statsData);
       } catch (err) {
         setError('Erro ao carregar dados do evento. Tente novamente mais tarde.');
         console.error('Erro ao buscar evento:', err);
@@ -75,7 +65,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
     fetchEvento();
   }, [params.id]);
 
-  // Função para formatar a data
   const formatarData = (dataString: string) => {
     const data = new Date(dataString);
     return data.toLocaleDateString('pt-BR');
@@ -98,7 +87,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
     }
   };
 
-  // Lógica de paginação para participantes
   const indexOfLastParticipante = currentPageParticipantes * cardsPerPage;
   const indexOfFirstParticipante = indexOfLastParticipante - cardsPerPage;
   const currentParticipantes = evento?.participantes.slice(indexOfFirstParticipante, indexOfLastParticipante) || [];
@@ -122,18 +110,15 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
     }
   };
 
-  // Gerar array de números de página para exibição
   const getPageNumbersParticipantes = () => {
     const pageNumbers = [];
-    const maxPageButtons = 5; // Número máximo de botões numéricos a exibir
+    const maxPageButtons = 5;
 
     if (totalPagesParticipantes <= maxPageButtons) {
-      // Se o total de páginas for menor que o máximo, mostrar todos
       for (let i = 1; i <= totalPagesParticipantes; i++) {
         pageNumbers.push(i);
       }
     } else {
-      // Caso contrário, mostrar um subconjunto com a página atual no centro
       let startPage = Math.max(1, currentPageParticipantes - Math.floor(maxPageButtons / 2));
       let endPage = startPage + maxPageButtons - 1;
 
@@ -152,13 +137,12 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header com gradiente inspirado na logo */}
       <header className="navbar bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 shadow-lg">
         <Link href="/eventos" className="text-white hover:text-gray-200">
           ← Voltar
         </Link>
         <h1 className="navbar-title text-white font-bold">Detalhes do Evento</h1>
-        <div className="w-6"></div> {/* Espaçador para centralizar o título */}
+        <div className="w-6"></div>
       </header>
 
       {/* Main Content */}
@@ -201,7 +185,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
               </div>
             </div>
 
-            {/* Tabs */}
             <div className="flex border-b border-gray-200 mb-6">
               <button
                 className={`flex-1 py-2 font-medium text-center ${activeTab === 'participantes' ? 'text-blue-600 border-b-2 border-blue-500' : 'text-gray-500'}`}
@@ -217,7 +200,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
               </button>
             </div>
 
-            {/* Tab Content */}
             {activeTab === 'detalhes' && stats && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -310,7 +292,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
                       ))}
                     </div>
 
-                    {/* Controles de Paginação para Participantes */}
                     <div className="mt-8 bg-white rounded-lg shadow-sm p-4 border border-gray-200">
                       <div className="flex flex-col items-center space-y-3">
                         <div className="flex items-center justify-center w-full">
@@ -323,15 +304,14 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
                             ←
                           </button>
 
-                          {/* Botões numéricos */}
                           <div className="flex">
                             {getPageNumbersParticipantes().map(number => (
                               <button
                                 key={number}
                                 onClick={() => goToPageParticipantes(number)}
                                 className={`px-4 py-2 border-t border-b ${currentPageParticipantes === number
-                                    ? 'bg-blue-600 text-white font-bold'
-                                    : 'bg-white text-blue-500 hover:bg-blue-50'
+                                  ? 'bg-blue-600 text-white font-bold'
+                                  : 'bg-white text-blue-500 hover:bg-blue-50'
                                   }`}
                               >
                                 {number}
@@ -425,7 +405,6 @@ export default function EventoDetalhes({ params }: EventoDetalhesProps) {
         )}
       </main>
 
-      {/* Bottom Navigation */}
       <nav className="bottom-nav">
         <Link href="/" className="bottom-nav-item">
           <span className="bottom-nav-icon">🏠</span>

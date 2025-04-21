@@ -4,12 +4,9 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header com gradiente inspirado na logo */}
       <header className="navbar bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 shadow-lg">
         <h1 className="navbar-title text-white font-bold">Sistema de Eventos</h1>
       </header>
-
-      {/* Main Content */}
       <main className="flex-grow container-mobile py-6">
         <div className="card mb-6">
           <div className="card-body text-center py-8">
@@ -55,8 +52,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      {/* Bottom Navigation */}
       <nav className="bottom-nav">
         <Link href="/" className="bottom-nav-item active">
           <span className="bottom-nav-icon">🏠</span>
