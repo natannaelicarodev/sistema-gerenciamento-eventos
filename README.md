@@ -13,8 +13,8 @@ Este é um sistema de gerenciamento de eventos com funcionalidades de check-in/c
 
 ## Funcionalidades
 
-- Gerenciamento de eventos (criar, visualizar, editar, excluir)
-- Gerenciamento de participantes (adicionar, visualizar, editar, excluir)
+- Gerenciamento de eventos 
+- Gerenciamento de participantes 
 - Check-in e check-out de participantes
 - Estatísticas de eventos (ocupação, presença, etc.)
 - Interface responsiva otimizada para dispositivos móveis
