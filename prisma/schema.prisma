@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../banco.db"
+}
+
+model Evento {
+  id            Int            @id @default(autoincrement())
+  nome          String
+  data          String
+  hora_inicio   String
+  hora_fim      String
+  local         String
+  capacidade    Int
+  checkins      Checkin[]
+  participantes Participante[]
+
+  @@map("eventos")
+}
+
+model Participante {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  email     String
+  telefone  String
+  evento_id Int
+  checkins  Checkin[]
+  evento    Evento    @relation(fields: [evento_id], references: [id])
+
+  @@map("participantes")
+}
+
+model Checkin {
+  id              Int          @id @default(autoincrement())
+  participante_id Int
+  evento_id       Int
+  hora_entrada    DateTime
+  hora_saida      DateTime?
+  status          String
+  evento          Evento       @relation(fields: [evento_id], references: [id])
+  participante    Participante @relation(fields: [participante_id], references: [id])
+
+  @@map("checkins")
+}
